@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .wrapper {
+      display: flex;
+      width: 100%;
+      border: 1px solid #333;
+    }
+    .left, .right {
+      width: 50%;
+      padding: 10px;
+      box-sizing: border-box;
+      border-right: 1px solid #ccc;
+    }
+    .right {
+      border-right: none;
+    }
+    .section-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .meta {
+      margin: 10px 0;
+      font-size: 14px;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      margin: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Prescription</h2>
+
+  <div class="meta">
+    <p><strong>Date:</strong> {{ prescription.timestamp }}</p>
+    {% if role == 'patient' %}
+      <h3>Doctor Details:</h3> 
+	  <p><strong>Name:{{ doctor.name }}</strong></p>
+	  <p><strong>Qualification:({{ doctor.qualification }})</strong></p>
+	  <h3>Patient Details:</h3>
+      <p><strong>Name:</strong> {{ patient.name }}</p>
+	  <p><strong>Contact:</strong> {{ patient.contact }}</p>
+    {% elif role == 'doctor' %}
+      <h3>Patient Details:</h3>
+      <p><strong>Name:</strong> {{ patient.name }}</p>
+	  <p><strong>Contact:</strong> {{ patient.contact }}</p>
+    {% endif %}
+  </div>
+
+  <p class="section-title">Diagnosis Summary:</p>
+  <p>{{ prescription.summary }}</p>
+
+  <div class="wrapper">
+    {{ prescription.content | safe }}
+  </div>
+
+</body>
+</html>

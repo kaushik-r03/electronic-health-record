@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Prescriptions</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>Prescriptions Created</h2>
+
+    {% if prescriptions %}
+      <ul>
+        {% for presc in prescriptions %}
+          <li>
+            <strong>{{ presc.timestamp }}</strong> —
+            <em>{{ presc.summary }}</em><br>
+            <a href="{{ url_for('view_prescription', presc_id=presc.id) }}">View</a> |
+            <a href="{{ url_for('download_prescription', presc_id=presc.id) }}">Download PDF</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No prescriptions created yet.</p>
+    {% endif %}
+
+    <br><a href="/prescription"><button>⬅ Back</button></a><br><br>
+    <a href="/logout"><button>Logout</button></a>
+  </div>
+</body>
+</html>

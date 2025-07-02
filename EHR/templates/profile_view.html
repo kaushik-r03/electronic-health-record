@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Profile</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>My Profile</h2>
+
+    <p><strong>Name:</strong> {{ user.name }}</p>
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>DOB:</strong> {{ user.dob or 'N/A' }}</p>
+    <p><strong>Contact:</strong> {{ user.contact or 'N/A' }}</p>
+
+    {% if user.role == 'patient' %}
+      <p><strong>Alternate Contact:</strong> {{ user.alt_contact or 'N/A' }}</p>
+    {% elif user.role == 'doctor' %}
+      <p><strong>Qualification:</strong> {{ user.qualification or 'N/A' }}</p>
+      <p><strong>College:</strong> {{ user.college or 'N/A' }}</p>
+    {% endif %}
+
+    <br>
+    <a href="{{ referrer }}"><button>⬅ Back</button></a>
+  </div>
+</body>
+</html>
